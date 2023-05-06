@@ -1,0 +1,12 @@
+CODE ::
+def calculate_private_key(e, n):
+    p = 61
+    q = 59
+    phi_n = (p-1) * (q-1)
+    d = pow(e, -1, phi_n)
+    return d, n
+e = int(input("ENTER E VALUE = "))
+n = int(input("ENTER N VALUE = "))
+d, n = calculate_private_key(e, n)
+print("Private key: ({}, {})".format(d, n))
+

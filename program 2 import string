@@ -1,0 +1,30 @@
+# Define the mapping for the cipher
+cipher_map = {'a': 'q', 'b': 'w', 'c': 'e', 'd': 'r', 'e': 't',
+              'f': 'y', 'g': 'u', 'h': 'i', 'i': 'o', 'j': 'p',
+              'k': 'a', 'l': 's', 'm': 'd', 'n': 'f', 'o': 'g',
+              'p': 'h', 'q': 'j', 'r': 'k', 's': 'l', 't': 'z',
+              'u': 'x', 'v': 'c', 'w': 'v', 'x': 'b', 'y': 'n', 'z': 'm'}
+
+# Define the reverse mapping for decryption
+decipher_map = {v: k for k, v in cipher_map.items()}
+
+def encrypt(message):
+    """Encrypts the given message using the cipher map."""
+    # Convert message to lowercase
+    message = message.lower()
+    # Initialize the encrypted message
+    encrypted_message = ''
+    # Encrypt each character in the message
+    for char in message:
+        if char in string.ascii_lowercase:
+            encrypted_char = cipher_map[char]
+        else:
+            encrypted_char = char
+        encrypted_message += encrypted_char
+    return encrypted_message
+
+
+
+message = input("Enter the text:")
+encrypted_message = encrypt(message)
+print(encrypted_message)

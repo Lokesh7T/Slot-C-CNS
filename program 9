@@ -1,0 +1,34 @@
+import itertools
+def find_keyword():
+    alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+    combinations = itertools.combinations(alphabet, 25)
+    for keyword in combinations:
+        matrix = [[0]*5 for _ in range(5)]
+        for i, letter in enumerate(keyword):
+            row = i // 5
+            col = i % 5
+            matrix[row][col] = letter
+        valid = True
+        for row in range(5):
+            for col in range(5):
+                if matrix[row][col] == 0:
+                    valid = False
+                    break
+                if matrix[row][col] == 'I' or matrix[row][col] == 'J':
+                   
+                    matrix[row][col] = 'IJ'
+                if matrix[row][col] in matrix[row][col+1:] + [matrix[i][col] for i in range(row+1, 5)]:
+                    
+                    valid = False
+                    break
+            if not valid:
+                break
+        if valid:
+            return keyword
+    return None
+keyword = find_keyword()
+if keyword is not None:
+    print(f"The keyword is {keyword}.")
+    print(f"Its approximate power of 2 is {2**(len(keyword)*5):,.0f}.")
+else:
+    print("No valid keyword was found.")

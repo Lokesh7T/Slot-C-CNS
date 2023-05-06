@@ -1,0 +1,24 @@
+1.	def caesar_cipher(message, shift):
+    cipher = ''
+    for char in message:
+        if char.isalpha():
+            char_code = ord(char) - shift
+            if char.isupper():
+                if char_code > ord('Z'):
+                    char_code -= 26
+                elif char_code < ord('A'):
+                    char_code += 26
+            elif char.islower():
+                if char_code > ord('z'):
+                    char_code -= 26
+                elif char_code < ord('a'):
+                    char_code += 26
+            cipher += chr(char_code)
+        else:
+            cipher += char
+    return cipher
+
+message = input("Enter the string to be decrypted")
+shift = 3
+decrypted_message = caesar_cipher(message, shift)
+print(decrypted_message)

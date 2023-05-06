@@ -1,0 +1,32 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+public class AffineCipherBreaker {
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static void main(String[] args) {
+        Scanner read = new Scanner(System.in);
+        String ciphertext = read.nextLine();
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        for (char c : ciphertext.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+        }
+        char mostFrequent = 'A';
+        char secondMostFrequent = 'A';
+        int highestFrequency = 0;
+        int secondHighestFrequency = 0;
+        for (char c : frequencyMap.keySet()) {
+            int frequency = frequencyMap.get(c);
+            if (frequency > highestFrequency) {
+                secondMostFrequent = mostFrequent;
+                secondHighestFrequency = highestFrequency;
+                mostFrequent = c;
+                highestFrequency = frequency;
+            } else if (frequency > secondHighestFrequency) {
+                secondMostFrequent = c;
+                secondHighestFrequency = frequency;
+            }
+        }
+        System.out.println("Most frequent letter: " + mostFrequent);
+        System.out.println("Second most frequent letter: " + secondMostFrequent);
+    }
+}

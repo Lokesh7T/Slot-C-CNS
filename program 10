@@ -1,0 +1,34 @@
+# Define the key matrix
+key = [[9, 4], [5, 7]]
+
+# Define the plaintext message
+plaintext = "meet me at the usual place at ten rather than eight oclock"
+
+# Convert the plaintext to uppercase and remove spaces
+plaintext = plaintext.upper().replace(" ", "")
+
+# Pad the plaintext with "X" if necessary to make the length a multiple of 2
+if len(plaintext) % 2 != 0:
+    plaintext += "X"
+
+# Split the plaintext into pairs of 2 letters and convert each pair to a vector
+plaintext_vectors = []
+for i in range(0, len(plaintext), 2):
+    pair = plaintext[i:i+2]
+    vector = [ord(pair[0])-65, ord(pair[1])-65]
+    plaintext_vectors.append(vector)
+
+# Multiply each plaintext vector by the key matrix to get the corresponding ciphertext vector
+ciphertext_vectors = []
+for vector in plaintext_vectors:
+    ciphertext_vector = [(key[0][0]*vector[0] + key[0][1]*vector[1]) % 26, (key[1][0]*vector[0] + key[1][1]*vector[1]) % 26]
+    ciphertext_vectors.append(ciphertext_vector)
+
+# Convert each ciphertext vector back to a pair of letters
+ciphertext = ""
+for vector in ciphertext_vectors:
+    pair = chr(vector[0]+65) + chr(vector[1]+65)
+    ciphertext += pair
+
+# Print the ciphertext
+print(ciphertext)
